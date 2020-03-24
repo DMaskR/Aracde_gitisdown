@@ -16,13 +16,19 @@
 #include <bitset>
 
 namespace ecs {
+
+    class WorldManager;
+    class World;
+    class Entity;
+    class AComponent;
+
     using ComponentID = std::size_t;
     using GroupID = std::string;
 
     inline ComponentID getNewComponentTypeID();
     template <typename T> inline ComponentID getComponentTypeID() noexcept;
 
-    inline GroupID getNewComponentTypeID();
+    inline GroupID getNewGroupTypeID();
     inline GroupID getComponentTypeID(GroupID groupName) noexcept;
 
     constexpr std::size_t maxComponents = 32;
@@ -32,10 +38,6 @@ namespace ecs {
     using ComponentBitSet = std::bitset<maxComponents>;
     using ComponentArray = std::array<AComponent*, maxComponents>;
 
-    class WorldManager;
-    class World;
-    class Entity;
-    class AComponent;
 
     class Universe{
         public:
