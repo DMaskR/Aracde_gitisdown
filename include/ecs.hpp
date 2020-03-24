@@ -21,6 +21,7 @@ namespace ecs {
     class World;
     class Entity;
     class AComponent;
+    class Vector2d;
 
     using ComponentID = std::size_t;
     using GroupID = std::string;
@@ -37,89 +38,6 @@ namespace ecs {
     using GroupBitset = std::bitset<maxGroups>;
     using ComponentBitSet = std::bitset<maxComponents>;
     using ComponentArray = std::array<AComponent*, maxComponents>;
-
-
-    class Universe{
-        public:
-            Universe();
-            ~Universe();
-            void addWorldManager(WorldManager& world);
-            void delWorldManager();
-
-        protected:
-            std::vector<std::reference_wrapper<WorldManager>> _managers;
-    };
-
-    class WorldManager :public Universe {
-        public:
-            WorldManager(World& _world);
-            ~WorldManager();
-            void addSystem(component::ASystem& system);
-            void init();
-            void update();
-            void render();
-        protected:
-        World& _world;
-        std::vector<std::reference_wrapper<component::ASystem>> _systems;
-
-
-    };
-
-    class World : public WorldManager{
-        public:
-            World();
-            ~World();
-            void refresh();
-            void addToGroup(Entity &entity, GroupID group);
-            template <typename ... Targs> std::vector<Entity *>& getEntities();
-            Entity &addEntity();
-
-        protected:
-            std::map<GroupID, std::vector<Entity&>> _groups;
-            std::vector<std::shared_ptr<Entity>> _entities;
-    };
-
-    class Entity : public World, public AComponent{
-        public:
-            Entity(World& world);
-            bool isActive();
-            void destroy();
-            template <typename T> bool hasComponent();
-            template <typename T, typename... Targs> bool hasComponent(TArgs&&... mArgs);
-            template <typename T> T& getComponent();
-            bool hasGroup(GroupID groupName);
-            void addGroup(GroupID groupName);
-            void delGroup(GroupID groupName);
-        protected:
-            World& _world;
-            bool _active = true;
-            std::set<std::unique_ptr<AComponent>> _components {};
-            std::set<GroupID> _groups {};
-            ComponentBitSet _componentBitSet;
-            ComponentArray _componentArray;
-            GroupBitset _groupBitSet;
-    };
-
-    class AComponent : public Entity {
-        public:
-            virtual ~AComponent() = 0;
-        protected:
-            Entity *_entity;
-    };
-
-    class IAnimation {
-        public:
-            virtual ~IAnimation() = 0;
-            virtual int frame() const = 0;
-            virtual int speed() const = 0;
-            virtual int index() const = 0;
-    };
-
-    class Vector2d {
-        public:
-            int x;
-            int y;
-    };
 
     namespace component {
         class Transform : public AComponent{
@@ -156,7 +74,7 @@ namespace ecs {
         class ARenderable : public AComponent {
             public:
                 ARenderable();
-                virtual ~Renderable() = 0;
+                virtual ~ARenderable() = 0;
                 virtual void setTexture(std::string name) = 0;
                 virtual void setAnimation(std::string animationName, IAnimation animation) = 0;
                 virtual std::string getCurrentAnimation() = 0;
@@ -246,6 +164,89 @@ namespace ecs {
                 void render() override;
         };
     }
+
+    class Universe{
+        public:
+            Universe();
+            ~Universe();
+            void addWorldManager(WorldManager& world);
+            void delWorldManager();
+
+        protected:
+            std::vector<std::reference_wrapper<WorldManager>> _managers;
+    };
+
+    class WorldManager :public Universe {
+        public:
+            WorldManager(World& _world);
+            ~WorldManager();
+            void addSystem(component::ASystem& system);
+            void init();
+            void update();
+            void render();
+        protected:
+        World& _world;
+        std::vector<std::reference_wrapper<component::ASystem>> _systems;
+
+
+    };
+
+    class World : public WorldManager{
+        public:
+            World();
+            ~World();
+            void refresh();
+            void addToGroup(Entity &entity, GroupID group);
+            template <typename ... Targs> std::vector<Entity *>& getEntities();
+            Entity &addEntity();
+
+        protected:
+            std::map<GroupID, std::vector<Entity&>> _groups;
+            std::vector<std::shared_ptr<Entity>> _entities;
+    };
+
+    class Entity : public World, public AComponent{
+        public:
+            Entity(World& world);
+            bool isActive();
+            void destroy();
+            template <typename T> bool hasComponent();
+            template <typename T, typename... Targs> bool hasComponent(TArgs&&... mArgs);
+            template <typename T> T& getComponent();
+            bool hasGroup(GroupID groupName);
+            void addGroup(GroupID groupName);
+            void delGroup(GroupID groupName);
+        protected:
+            World& _world;
+            bool _active = true;
+            std::set<std::unique_ptr<AComponent>> _components {};
+            std::set<GroupID> _groups {};
+            ComponentBitSet _componentBitSet;
+            ComponentArray _componentArray;
+            GroupBitset _groupBitSet;
+    };
+
+    class AComponent : public Entity {
+        public:
+            virtual ~AComponent() = 0;
+        protected:
+            Entity *_entity;
+    };
+
+    class IAnimation {
+        public:
+            virtual ~IAnimation() = 0;
+            virtual int frame() const = 0;
+            virtual int speed() const = 0;
+            virtual int index() const = 0;
+    };
+
+    class Vector2d {
+        public:
+            int x;
+            int y;
+    };
+
 }
 
 #endif /* !ECS_HPP_ */
