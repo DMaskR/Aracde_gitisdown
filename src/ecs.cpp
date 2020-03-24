@@ -49,10 +49,10 @@ void ecs::World::refresh()
 //add entity to group
 void ecs::World::addToGroup(ecs::Entity &entity, GroupID group)
 {
-
 }
+
 //get entities
-template <typename ... Targs> std::vector<ecs::Entity &>& ecs::World::getEntities()
+template <typename ... TArgs> std::vector<ecs::Entity &>& ecs::World::getEntities()
 {
 
 }
@@ -78,7 +78,7 @@ template <typename T> bool ecs::Entity::hasComponent()
 
 }
 //
-template <typename T, typename... Targs> bool ecs::Entity::hasComponent(TArgs&&... mArgs)
+template <typename T, typename... TArgs> bool ecs::Entity::hasComponent(TArgs&&... mArgs)
 {
 
 }
