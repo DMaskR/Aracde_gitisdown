@@ -30,12 +30,12 @@ namespace ecs {
 
     using GroupBitset = std::bitset<maxGroups>;
     using ComponentBitSet = std::bitset<maxComponents>;
-    using ComponentArray = std::array<ecs::AComponent*, maxComponents>;
+    using ComponentArray = std::array<AComponent*, maxComponents>;
 
     class WorldManager;
     class World;
-    Class Entity;
-    Class AComponent;
+    class Entity;
+    class AComponent;
 
     class Universe{
         public:
@@ -52,13 +52,13 @@ namespace ecs {
         public:
             WorldManager(World& _world);
             ~WorldManager();
-            void addSystem(ecs::component::ASystem& system);
+            void addSystem(component::ASystem& system);
             void init();
             void update();
             void render();
         protected:
-        ecs::World& _world;
-        std::vector<std::reference_wrapper<ecs::component::ASystem>> _systems;
+        World& _world;
+        std::vector<std::reference_wrapper<component::ASystem>> _systems;
 
 
     };
@@ -68,13 +68,13 @@ namespace ecs {
             World();
             ~World();
             void refresh();
-            void addToGroup(ecs::Entity &entity, GroupID group);
-            template <typename ... Targs> std::vector<ecs::Entity *>& getEntities();
-            ecs::Entity &addEntity();
+            void addToGroup(Entity &entity, GroupID group);
+            template <typename ... Targs> std::vector<Entity *>& getEntities();
+            Entity &addEntity();
 
         protected:
-            std::map<GroupID, std::vector<ecs::Entity&>> _groups;
-            std::vector<std::shared_ptr<ecs::Entity>> _entities;
+            std::map<GroupID, std::vector<Entity&>> _groups;
+            std::vector<std::shared_ptr<Entity>> _entities;
     };
 
     class Entity : public World, public AComponent{
@@ -156,7 +156,7 @@ namespace ecs {
                 ARenderable();
                 virtual ~Renderable() = 0;
                 virtual void setTexture(std::string name) = 0;
-                virtual void setAnimation(std::string animationName, ecs::IAnimation animation) = 0;
+                virtual void setAnimation(std::string animationName, IAnimation animation) = 0;
                 virtual std::string getCurrentAnimation() = 0;
                 virtual void useAnimation(std::string animationName) = 0;
         };
@@ -190,7 +190,7 @@ namespace ecs {
     }
 
     namespace system {
-        class Physics : public ecs::component::ASystem {
+        class Physics : public component::ASystem {
             public:
                 Physics();
                 ~Physics();
@@ -199,7 +199,7 @@ namespace ecs {
                 void render() override;
         };
 
-        class APlayer : public ecs::component::ASystem {
+        class APlayer : public component::ASystem {
             public:
                 APlayer();
                 ~APlayer();
@@ -208,7 +208,7 @@ namespace ecs {
                 void render() override;
         };
 
-        class AAI : public ecs::component::ASystem {
+        class AAI : public component::ASystem {
             public:
                 AAI();
                 ~AAI();
@@ -217,7 +217,7 @@ namespace ecs {
                 void render() override;
         };
 
-        class AFollow : public ecs::component::ASystem {
+        class AFollow : public component::ASystem {
             public:
                 AFollow();
                 ~AFollow();
@@ -226,7 +226,7 @@ namespace ecs {
                 void render() override;
         };
 
-        class Movement : public ecs::component::ASystem {
+        class Movement : public component::ASystem {
             public:
                 Movement();
                 ~Movement();
@@ -235,7 +235,7 @@ namespace ecs {
                 void render() override;
         };
 
-        class AGraphics : public ecs::component::ASystem {
+        class AGraphics : public component::ASystem {
             public:
                 AGraphics();
                 ~AGraphics();
