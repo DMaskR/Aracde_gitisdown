@@ -39,6 +39,19 @@ namespace ecs {
     using ComponentBitSet = std::bitset<maxComponents>;
     using ComponentArray = std::array<AComponent*, maxComponents>;
 
+    class AComponent : public Entity {
+        public:
+            virtual ~AComponent() = 0;
+        protected:
+            Entity *_entity;
+    };
+
+    class Vector2d {
+        public:
+            int x;
+            int y;
+    };
+
     namespace component {
         class Transform : public AComponent{
             public:
@@ -226,25 +239,12 @@ namespace ecs {
             GroupBitset _groupBitSet;
     };
 
-    class AComponent : public Entity {
-        public:
-            virtual ~AComponent() = 0;
-        protected:
-            Entity *_entity;
-    };
-
     class IAnimation {
         public:
             virtual ~IAnimation() = 0;
             virtual int frame() const = 0;
             virtual int speed() const = 0;
             virtual int index() const = 0;
-    };
-
-    class Vector2d {
-        public:
-            int x;
-            int y;
     };
 
 }
