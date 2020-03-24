@@ -17,7 +17,6 @@
 
 namespace ecs {
 
-    class WorldManager;
     class World;
     class Entity;
     class AComponent;
@@ -43,19 +42,17 @@ namespace ecs {
             int x;
             int y;
     };
+    namespace component {
+        class ASystem : public WorldManager {
+            public:
+                virtual ~ASystem() = 0;
+                virtual void init() = 0;
+                virtual void update() = 0;
+                virtual void render() = 0;
+        };
+    }
 
-    class Universe{
-        public:
-            Universe();
-            ~Universe();
-            void addWorldManager(WorldManager& world);
-            void delWorldManager();
-
-        protected:
-            std::vector<std::reference_wrapper<WorldManager>> _managers;
-    };
-
-    class WorldManager :public Universe {
+    class WorldManager : public Universe {
         public:
             WorldManager(World& _world);
             ~WorldManager();
@@ -66,6 +63,17 @@ namespace ecs {
         protected:
         World& _world;
         std::vector<std::reference_wrapper<component::ASystem>> _systems;
+    };
+
+    class Universe{
+        public:
+            Universe();
+            ~Universe();
+            void addWorldManager(WorldManager& world);
+            void delWorldManager();
+
+        protected:
+            std::vector<std::reference_wrapper<WorldManager>> _managers;
     };
 
     class World : public WorldManager{
@@ -171,13 +179,6 @@ namespace ecs {
                 ~Input();
         };
 
-        class ASystem : public WorldManager {
-            public:
-                virtual ~ASystem() = 0;
-                virtual void init() = 0;
-                virtual void update() = 0;
-                virtual void render() = 0;
-        };
     }
 
     namespace system {
