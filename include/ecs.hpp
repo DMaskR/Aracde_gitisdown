@@ -22,7 +22,7 @@ namespace ecs {
     inline ComponentID getNewComponentTypeID();
     template <typename T> inline ComponentID getComponentTypeID() noexcept;
 
-    inline GroupID getNewGroupTypeID();
+    inline GroupID getNewComponentTypeID();
     inline GroupID getComponentTypeID(GroupID groupName) noexcept;
 
     constexpr std::size_t maxComponents = 32;
@@ -30,7 +30,12 @@ namespace ecs {
 
     using GroupBitset = std::bitset<maxGroups>;
     using ComponentBitSet = std::bitset<maxComponents>;
-    using ComponentArray = std::array<ecs::AComponent, maxComponents>;
+    using ComponentArray = std::array<ecs::AComponent*, maxComponents>;
+
+    class WorldManager;
+    class World;
+    Class Entity;
+    Class AComponent;
 
     class Universe{
         public:
