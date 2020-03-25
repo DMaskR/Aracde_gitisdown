@@ -162,7 +162,7 @@ namespace ecs {
                 ARenderable();
                 virtual ~ARenderable() = 0;
                 virtual void setTexture(std::string name) = 0;
-                virtual void setAnimation(std::string animationName, IAnimation animation) = 0;
+                virtual void setAnimation(std::string animationName, IAnimation &animation) = 0;
                 virtual std::string getCurrentAnimation() = 0;
                 virtual void useAnimation(std::string animationName) = 0;
         };
