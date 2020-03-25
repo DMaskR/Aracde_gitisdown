@@ -17,9 +17,9 @@ namespace event {
             ~Event();
     };
 
-    class InputEvent() : public event::Event {};
+    class InputEvent : public event::Event {};
 
-    class CollisionEvent() : public event::Event {};
+    class CollisionEvent : public event::Event {};
 
     class AFunctionHandler {
         public:
