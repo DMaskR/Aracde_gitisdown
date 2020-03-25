@@ -121,17 +121,17 @@ void ecs::system::Physics::render()
 }
 
 //system->ASystem
-void ecs::component::ASystem::init()
+void ecs::ASystem::init()
 {
 
 }
 
-void ecs::component::ASystem::update()
+void ecs::ASystem::update()
 {
 
 }
 
-void ecs::component::ASystem::render()
+void ecs::ASystem::render()
 {
 
 }
