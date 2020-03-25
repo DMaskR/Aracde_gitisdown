@@ -19,7 +19,7 @@ enum LIBTYPE {
     TEXT,
     GRAPHIC,
     DEBUG
-}
+};
 
 namespace ecs {
 

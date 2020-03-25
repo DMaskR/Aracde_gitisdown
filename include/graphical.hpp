@@ -12,13 +12,13 @@
 #include <vector>
 #include "ecs.hpp"
 
-namespace Graphical {
+namespace graphical {
     class IGraphical {
         public:
             virtual ~IGraphical() = 0;
             virtual LIBTYPE getType() = 0;
-            virtual ecs::component::ARenderable createRenderable(std::vector<std::string> paths, bool isAnimated = false) = 0;
-            virtual ecs::IAnimation createAnimation(int index, int frame, int speed) = 0;
+            virtual ecs::component::ARenderable& createRenderable(std::vector<std::string> paths, bool isAnimated = false) = 0;
+            virtual ecs::IAnimation& createAnimation(int index, int frame, int speed) = 0;
     };
 
     class AGraphical : public IGraphical {
@@ -26,8 +26,8 @@ namespace Graphical {
             AGraphical(LIBTYPE type, ecs::Universe& universe);
             ~AGraphical() override;
             LIBTYPE getType() override;
-            ecs::component::ARenderable createRenderable(std::vector<std::string> paths, bool isAnimated = false) override = 0;
-            ecs::IAnimation createAnimation(int index, int frame, int speed) override = 0;
+            ecs::component::ARenderable& createRenderable(std::vector<std::string> paths, bool isAnimated = false) override = 0;
+            ecs::IAnimation& createAnimation(int index, int frame, int speed) override = 0;
     };
 
     class Animation : public ecs::IAnimation {
@@ -45,8 +45,8 @@ namespace Graphical {
                 Graphical(ecs::Universe& universe);
                 ~Graphical();
                 LIBTYPE getType() override;
-                ecs::component::ARenderable createRenderable(std::vector<std::string> paths, bool isAnimated = false) override;
-                ecs::IAnimation createAnimation(int index, int frame, int speed) override;
+                ecs::component::ARenderable& createRenderable(std::vector<std::string> paths, bool isAnimated = false) override;
+                ecs::IAnimation& createAnimation(int index, int frame, int speed) override;
         };
 
         namespace component {
@@ -79,8 +79,8 @@ namespace Graphical {
                 Graphical(ecs::Universe& universe);
                 ~Graphical();
                 LIBTYPE getType() override;
-                ecs::component::ARenderable createRenderable(std::vector<std::string> paths, bool isAnimated = false) override;
-                ecs::IAnimation createAnimation(int index, int frame, int speed) override;
+                ecs::component::ARenderable& createRenderable(std::vector<std::string> paths, bool isAnimated = false) override;
+                ecs::IAnimation& createAnimation(int index, int frame, int speed) override;
         };
 
         namespace component{
@@ -112,8 +112,8 @@ namespace Graphical {
                 Graphical(ecs::Universe& universe);
                 ~Graphical();
                 LIBTYPE getType() override;
-                ecs::component::ARenderable createRenderable(std::vector<std::string> paths, bool isAnimated = false) override;
-                ecs::IAnimation createAnimation(int index, int frame, int speed) override;
+                ecs::component::ARenderable& createRenderable(std::vector<std::string> paths, bool isAnimated = false) override;
+                ecs::IAnimation& createAnimation(int index, int frame, int speed) override;
         };
 
         namespace component{
