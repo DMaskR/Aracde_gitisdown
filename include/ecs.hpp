@@ -69,8 +69,6 @@ namespace ecs {
         public:
             Universe();
             ~Universe();
-            void addWorldManager(World& world);
-            void delWorldManager();
 
         protected:
             std::vector<std::reference_wrapper<World>> _managers;
