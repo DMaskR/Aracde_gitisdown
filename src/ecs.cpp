@@ -20,7 +20,7 @@ void ecs::Universe::delWorldManager()
 }
 
 //add System to theWorldManager
-void ecs::WorldManager::addSystem(ecs::component::ASystem& system)
+void ecs::WorldManager::addSystem(ASystem& system)
 {
     this->_systems.push_back(system);
 }

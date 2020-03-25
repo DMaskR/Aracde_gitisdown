@@ -51,6 +51,14 @@ namespace ecs {
             virtual void render() = 0;
     };
 
+    class IAnimation {
+        public:
+            virtual ~IAnimation() = 0;
+            virtual int frame() const = 0;
+            virtual int speed() const = 0;
+            virtual int index() const = 0;
+    };
+
     class WorldManager {
         public:
             WorldManager(World& _world);
@@ -235,15 +243,6 @@ namespace ecs {
                 void render() override;
         };
     }
-
-
-    class IAnimation {
-        public:
-            virtual ~IAnimation() = 0;
-            virtual int frame() const = 0;
-            virtual int speed() const = 0;
-            virtual int index() const = 0;
-    };
 
 }
 
