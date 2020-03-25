@@ -15,6 +15,12 @@
 #include <map>
 #include <bitset>
 
+enum LIBTYPE {
+    TEXT,
+    GRAPHIC,
+    DEBUG
+}
+
 namespace ecs {
 
     class World;

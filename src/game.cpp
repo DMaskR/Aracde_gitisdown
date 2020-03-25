@@ -5,7 +5,7 @@
 ** game
 */
 
-#include "game.cpp"
+#include "game.hpp"
 
 //nibbler
 //nibbler->AI

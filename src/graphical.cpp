@@ -6,7 +6,7 @@
 */
 
 #include "ecs.hpp"
-#include "Graphical.hpp"
+#include "graphical.hpp"
 
 //AGraphical
 LIBTYPE Graphical::AGraphical::getType()

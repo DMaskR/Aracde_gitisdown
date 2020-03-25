@@ -9,7 +9,7 @@
 #define GAME_HPP_
 
 #include "ecs.hpp"
-#include "Graphical.hpp"
+#include "graphical.hpp"
 
 namespace game{
     class IGame {
