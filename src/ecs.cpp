@@ -8,7 +8,7 @@
 #include "ecs.hpp"
 
 //add World to the Univers
-void ecs::Universe::addWorldManager(WorldManager& world)
+void ecs::Universe::addWorldManager(World& world)
 {
     this->_managers.push_back(world);
 }
@@ -19,28 +19,6 @@ void ecs::Universe::delWorldManager()
     this->_managers.pop_back();
 }
 
-//add System to theWorldManager
-void ecs::WorldManager::addSystem(ASystem& system)
-{
-    this->_systems.push_back(system);
-}
-
-//initialisation of all Systems
-void ecs::WorldManager::init()
-{
-
-}
-
-//update all Systems
-void ecs::WorldManager::update()
-{
-
-}
-
-void ecs::WorldManager::render()
-{
-
-}
 //refresh all entities
 void ecs::World::refresh()
 {

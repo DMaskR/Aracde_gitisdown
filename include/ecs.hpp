@@ -59,28 +59,15 @@ namespace ecs {
             virtual int index() const = 0;
     };
 
-    class WorldManager {
-        public:
-            WorldManager(World& _world);
-            ~WorldManager();
-            void addSystem(ASystem& system);
-            void init();
-            void update();
-            void render();
-        protected:
-        World& _world;
-        std::vector<std::reference_wrapper<ASystem>> _systems;
-    };
-
     class Universe {
         public:
             Universe();
             ~Universe();
-            void addWorldManager(WorldManager& world);
+            void addWorldManager(World& world);
             void delWorldManager();
 
         protected:
-            std::vector<std::reference_wrapper<WorldManager>> _managers;
+            std::vector<std::reference_wrapper<World>> _managers;
     };
 
     class World {

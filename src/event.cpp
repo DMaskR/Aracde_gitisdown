@@ -12,7 +12,8 @@ void event::AFunctionHandler::exec(Event* event)
 
 }
 
-void event::FunctionHandler::call(Event* event)
+template<class T, class EventType>
+void event::FunctionHandler<T, EventType>::call(Event* event)
 {
 
 }
