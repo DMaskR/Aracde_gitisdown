@@ -14,7 +14,7 @@ LIBTYPE graphical::AGraphical::getType()
 
 }
 
-ecs::component::ARenderable& graphical::AGraphical::createRenderable(std::vector<std::string> paths, bool isAnimated = false)
+ecs::component::ARenderable& graphical::AGraphical::createRenderable(std::vector<std::string> paths, bool isAnimated)
 {
 
 }
@@ -25,29 +25,29 @@ ecs::IAnimation& graphical::AGraphical::createAnimation(int index, int frame, in
 }
 
 //Animation
-int graphical::Animation::frame()
+int graphical::Animation::frame() const
 {
 
 }
 
-int graphical::Animation::speed()
+int graphical::Animation::speed() const
 {
 
 }
 
-int graphical::Animation::index()
+int graphical::Animation::index() const
 {
 
 }
 
 //sfml
 //sfml->AGraphical
-ecs::component::ARenderable& graphical::sfml::AGraphical::createRenderable(std::vector<std::string> paths, bool isAnimated = false)
+ecs::component::ARenderable& graphical::sfml::Graphical::createRenderable(std::vector<std::string> paths, bool isAnimated)
 {
 
 }
 
-ecs::IAnimation& graphical::sfml::AGraphical::createAnimation(int index, int frame, int speed)
+ecs::IAnimation& graphical::sfml::Graphical::createAnimation(int index, int frame, int speed)
 {
 
 }
@@ -58,7 +58,7 @@ void graphical::sfml::component::Renderable::setTexture(std::string name)
 
 }
 
-void graphical::sfml::component::Renderable::setAnimation(std::string animationName, ecs::IAnimation animation)
+void graphical::sfml::component::Renderable::setAnimation(std::string animationName, ecs::IAnimation &animation)
 {
 
 }
@@ -91,18 +91,18 @@ void graphical::sfml::system::Graphics::render()
 
 //ncurses
 //ncurses->AGraphical
-ecs::component::ARenderable &graphical::ncurses::AGraphical::createRenderable(std::vector<std::string> paths, bool isAnimated = false)
+ecs::component::ARenderable &graphical::ncurses::Graphical::createRenderable(std::vector<std::string> paths, bool isAnimated)
 {
 
 }
 
-ecs::IAnimation &graphical::ncurses::AGraphical::createAnimation(int index, int frame, int speed)
+ecs::IAnimation &graphical::ncurses::Graphical::createAnimation(int index, int frame, int speed)
 {
 
 }
 
 //ncurses->Renderable
-void graphical::ncurses::component::Renderable::setAnimation(std::string animationName, ecs::IAnimation animation)
+void graphical::ncurses::component::Renderable::setAnimation(std::string animationName, ecs::IAnimation &animation)
 {
 
 }
@@ -135,18 +135,18 @@ void graphical::ncurses::system::Graphics::render()
 
 //libcaca
 //libcaca->AGraphical
-ecs::component::ARenderable &graphical::libcaca::AGraphical::createRenderable(std::vector<std::string> paths, bool isAnimated = false)
+ecs::component::ARenderable &graphical::libcaca::Graphical::createRenderable(std::vector<std::string> paths, bool isAnimated)
 {
 
 }
 
-ecs::IAnimation graphical::libcaca::AGraphical::createAnimation(int index, int frame, int speed)
+ecs::IAnimation &graphical::libcaca::Graphical::createAnimation(int index, int frame, int speed)
 {
 
 }
 
 //libcaca->Renderable
-void graphical::libcaca::component::Renderable::setAnimation(std::string animationName, ecs::IAnimation animation)
+void graphical::libcaca::component::Renderable::setAnimation(std::string animationName, ecs::IAnimation &animation)
 {
 
 }
