@@ -42,30 +42,29 @@ namespace ecs {
             int x;
             int y;
     };
-    namespace component {
-        class ASystem : public WorldManager {
-            public:
-                virtual ~ASystem() = 0;
-                virtual void init() = 0;
-                virtual void update() = 0;
-                virtual void render() = 0;
-        };
-    }
 
-    class WorldManager : public Universe {
+    class ASystem {
+        public:
+            virtual ~ASystem() = 0;
+            virtual void init() = 0;
+            virtual void update() = 0;
+            virtual void render() = 0;
+    };
+
+    class WorldManager {
         public:
             WorldManager(World& _world);
             ~WorldManager();
-            void addSystem(component::ASystem& system);
+            void addSystem(ASystem& system);
             void init();
             void update();
             void render();
         protected:
         World& _world;
-        std::vector<std::reference_wrapper<component::ASystem>> _systems;
+        std::vector<std::reference_wrapper<ASystem>> _systems;
     };
 
-    class Universe{
+    class Universe {
         public:
             Universe();
             ~Universe();
@@ -76,7 +75,7 @@ namespace ecs {
             std::vector<std::reference_wrapper<WorldManager>> _managers;
     };
 
-    class World : public WorldManager{
+    class World {
         public:
             World();
             ~World();
@@ -90,7 +89,7 @@ namespace ecs {
             std::vector<std::shared_ptr<Entity>> _entities;
     };
 
-    class Entity : public World{
+    class Entity {
         public:
             Entity(World& world);
             bool isActive();
@@ -111,7 +110,7 @@ namespace ecs {
             GroupBitset _groupBitSet;
     };
 
-    class AComponent : public Entity {
+    class AComponent {
         public:
             virtual ~AComponent() = 0;
         protected:
@@ -182,7 +181,7 @@ namespace ecs {
     }
 
     namespace system {
-        class Physics : public component::ASystem {
+        class Physics : public ASystem {
             public:
                 Physics();
                 ~Physics();
@@ -191,7 +190,7 @@ namespace ecs {
                 void render() override;
         };
 
-        class APlayer : public component::ASystem {
+        class APlayer : public ASystem {
             public:
                 APlayer();
                 ~APlayer();
@@ -200,7 +199,7 @@ namespace ecs {
                 void render() override;
         };
 
-        class AAI : public component::ASystem {
+        class AAI : public ASystem {
             public:
                 AAI();
                 ~AAI();
@@ -209,7 +208,7 @@ namespace ecs {
                 void render() override;
         };
 
-        class AFollow : public component::ASystem {
+        class AFollow : public ASystem {
             public:
                 AFollow();
                 ~AFollow();
@@ -218,7 +217,7 @@ namespace ecs {
                 void render() override;
         };
 
-        class Movement : public component::ASystem {
+        class Movement : public ASystem {
             public:
                 Movement();
                 ~Movement();
@@ -227,7 +226,7 @@ namespace ecs {
                 void render() override;
         };
 
-        class AGraphics : public component::ASystem {
+        class AGraphics : public ASystem {
             public:
                 AGraphics();
                 ~AGraphics();
