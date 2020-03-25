@@ -52,7 +52,7 @@ void ecs::World::addToGroup(ecs::Entity &entity, GroupID group)
 }
 
 //get entities
-template <typename ... TArgs> std::vector<ecs::Entity &>& ecs::World::getEntities()
+template <typename ... TArgs> std::vector<ecs::Entity*>& ecs::World::getEntities()
 {
 
 }
