@@ -37,7 +37,7 @@ namespace ecs {
     class Entity;
     class AComponent;
 
-    class Universe{
+    class Universe {
         public:
             Universe();
             ~Universe();
@@ -48,7 +48,7 @@ namespace ecs {
             std::vector<std::reference_wrapper<WorldManager>> _managers;
     };
 
-    class WorldManager :public Universe {
+    class WorldManager {
         public:
             WorldManager(World& _world);
             ~WorldManager();
@@ -63,7 +63,7 @@ namespace ecs {
 
     };
 
-    class World : public WorldManager{
+    class World {
         public:
             World();
             ~World();
@@ -77,7 +77,7 @@ namespace ecs {
             std::vector<std::shared_ptr<Entity>> _entities;
     };
 
-    class Entity : public World, public AComponent{
+    class Entity {
         public:
             Entity(World& world);
             bool isActive();
@@ -98,7 +98,7 @@ namespace ecs {
             GroupBitset _groupBitSet;
     };
 
-    class AComponent : public Entity {
+    class AComponent {
         public:
             virtual ~AComponent() = 0;
         protected:
@@ -180,7 +180,7 @@ namespace ecs {
                 ~Input();
         };
 
-        class ASystem : public WorldManager {
+        class ASystem {
             public:
                 virtual ~ASystem() = 0;
                 virtual void init() = 0;
