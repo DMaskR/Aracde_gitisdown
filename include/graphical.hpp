@@ -12,25 +12,25 @@
 #include <vector>
 #include "ecs.hpp"
 
-namespace Graphical {
+namespace graphical {
     class IGraphical {
         public:
             virtual ~IGraphical() = 0;
             virtual LIBTYPE getType() = 0;
-            virtual ecs::component::ARenderable createRenderable(std::vector<std::string> paths, bool isAnimated = false) = 0;
-            virtual ecs::IAnimation createAnimation(int index, int frame, int speed) = 0;
+            virtual ecs::component::ARenderable& createRenderable(std::vector<std::string> paths, bool isAnimated = false) = 0;
+            virtual ecs::IAnimation& createAnimation(int index, int frame, int speed) = 0;
     };
 
     class AGraphical : public IGraphical {
         public:
-            AGraphical(LIBTYPE type, Universe& universe);
+            AGraphical(LIBTYPE type, ecs::Universe& universe);
             ~AGraphical() override;
             LIBTYPE getType() override;
-            ecs::component::ARenderable createRenderable(std::vector<std::string> paths, bool isAnimated = false) override = 0;
-            ecs::IAnimation createAnimation(int index, int frame, int speed) override = 0;
+            ecs::component::ARenderable& createRenderable(std::vector<std::string> paths, bool isAnimated = false) override = 0;
+            ecs::IAnimation& createAnimation(int index, int frame, int speed) override = 0;
     };
 
-    class Animation : public IAnimation {
+    class Animation : public ecs::IAnimation {
         public:
             Animation(int index, int frame, int speed);
             ~Animation();
@@ -42,20 +42,20 @@ namespace Graphical {
     namespace sfml {
         class Graphical : public AGraphical {
             public:
-                Graphical(Universe& universe);
+                Graphical(ecs::Universe& universe);
                 ~Graphical();
                 LIBTYPE getType() override;
-                ecs::component::ARenderable createRenderable(std::vector<std::string> paths, bool isAnimated = false) override;
-                ecs::IAnimation createAnimation(int index, int frame, int speed) override;
+                ecs::component::ARenderable& createRenderable(std::vector<std::string> paths, bool isAnimated = false) override;
+                ecs::IAnimation& createAnimation(int index, int frame, int speed) override;
         };
 
         namespace component {
             class Renderable : public ecs::component::ARenderable {
                 public:
-                    Sprite(std::string name, bool isAnimated = false);
-                    ~Sprite();
+                    Renderable(std::string name, bool isAnimated = false);
+                    ~Renderable();
                     void setTexture(std::string name) override;
-                    void setAnimation(std::string animationName, ecs::IAnimation animation) override;
+                    void setAnimation(std::string animationName, ecs::IAnimation &animation) override;
                     std::string getCurrentAnimation() override;
                     void useAnimation(std::string animationName) override;
             };
@@ -74,21 +74,21 @@ namespace Graphical {
     }
 
     namespace ncurses {
-        class Graphical : public graphical::AGraphical {
+        class Graphical : public AGraphical {
             public:
-                Graphical(Universe& universe);
+                Graphical(ecs::Universe& universe);
                 ~Graphical();
                 LIBTYPE getType() override;
-                ecs::component::ARenderable createRenderable(std::vector<std::string> paths, bool isAnimated = false) override;
-                ecs::IAnimation createAnimation(int index, int frame, int speed) override;
+                ecs::component::ARenderable& createRenderable(std::vector<std::string> paths, bool isAnimated = false) override;
+                ecs::IAnimation& createAnimation(int index, int frame, int speed) override;
         };
 
         namespace component{
             class Renderable : public ecs::component::ARenderable {
                 public:
-                    Sprite(std::string name, bool isAnimated = false);
-                    ~Sprite();
-                    void setAnimation(std::string animationName, ecs::IAnimation animation) override;
+                    Renderable(std::string name, bool isAnimated = false);
+                    ~Renderable();
+                    void setAnimation(std::string animationName, ecs::IAnimation &animation) override;
                     std::string getCurrentAnimation() override;
                     void useAnimation(std::string animationName) override;
             };
@@ -107,21 +107,21 @@ namespace Graphical {
     }
 
     namespace libcaca {
-        class Graphical : public graphical::AGraphical {
+        class Graphical : public AGraphical {
             public:
-                Graphical(Universe& universe);
+                Graphical(ecs::Universe& universe);
                 ~Graphical();
                 LIBTYPE getType() override;
-                ecs::component::ARenderable createRenderable(std::vector<std::string> paths, bool isAnimated = false) override;
-                ecs::IAnimation createAnimation(int index, int frame, int speed) override;
+                ecs::component::ARenderable& createRenderable(std::vector<std::string> paths, bool isAnimated = false) override;
+                ecs::IAnimation& createAnimation(int index, int frame, int speed) override;
         };
 
         namespace component{
             class Renderable : public ecs::component::ARenderable {
                 public:
-                    Sprite(std::string name, bool isAnimated = false);
-                    ~Sprite();
-                    void setAnimation(std::string animationName, ecs::IAnimation animation) override;
+                    Renderable(std::string name, bool isAnimated = false);
+                    ~Renderable();
+                    void setAnimation(std::string animationName, ecs::IAnimation &animation) override;
                     std::string getCurrentAnimation() override;
                     void useAnimation(std::string animationName) override;
             };

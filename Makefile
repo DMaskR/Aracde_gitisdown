@@ -13,7 +13,7 @@ SRCS             =		src/ecs.cpp				\
 						src/event.cpp				\
 						src/game.cpp		\
 						src/graphical.cpp		\
-						main.cpp
+						src/main.cpp
 
 OBJS             =		$(SRCS:.cpp=.o)
 

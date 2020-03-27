@@ -9,7 +9,7 @@
 #define GAME_HPP_
 
 #include "ecs.hpp"
-#include "Graphical.hpp"
+#include "graphical.hpp"
 
 namespace game{
     class IGame {
@@ -20,12 +20,12 @@ namespace game{
 
     class AGame : public IGame {
         public:
-            AGame(Universe &universe, IGraphical &graph);
+            AGame(ecs::Universe &universe, graphical::IGraphical &graph);
             virtual ~AGame() = 0;
     };
 
     namespace nibbler{
-        class AI : public AAI{
+        class AI : public ecs::system::AAI{
             public:
                 AI();
                 ~AI();
@@ -34,7 +34,7 @@ namespace game{
                 void render() override;
         };
 
-        class Follow : public AFollow {
+        class Follow : public ecs::system::AFollow {
             public:
                 Follow();
                 ~Follow();
@@ -45,11 +45,11 @@ namespace game{
 
         class Game : public AGame{
             public:
-                Game(Universe &universe, IGraphical &graph),
+                Game(ecs::Universe &universe, graphical::IGraphical &graph),
                 ~Game();
         };
 
-        class Player {
+        class Player : public ecs::system::APlayer {
             public:
                 Player();
                 ~Player();
@@ -60,7 +60,7 @@ namespace game{
     }
 
     namespace pacman {
-        class AI : public AAI{
+        class AI : public ecs::system::AAI{
             public:
                 AI();
                 ~AI();
@@ -69,7 +69,7 @@ namespace game{
                 void render() override;
         };
 
-        class Follow : public AFollow {
+        class Follow : public ecs::system::AFollow {
             public:
                 Follow();
                 ~Follow();
@@ -80,10 +80,10 @@ namespace game{
 
         class Game : public AGame{
             public:
-                Game(Universe &universe, IGraphical &graph),
+                Game(ecs::Universe &universe, graphical::IGraphical &graph),
                 ~Game();
         };
-        class Player {
+        class Player : public ecs::system::APlayer{
             public:
                 Player();
                 ~Player();

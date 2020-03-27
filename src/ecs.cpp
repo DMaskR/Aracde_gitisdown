@@ -7,40 +7,6 @@
 
 #include "ecs.hpp"
 
-//add World to the Univers
-void ecs::Universe::addWorldManager(WorldManager& world)
-{
-    this->_managers.push_back(world);
-}
-
-//delete world of the Univers
-void ecs::Universe::delWorldManager()
-{
-    this->_managers.pop_back();
-}
-
-//add System to theWorldManager
-void ecs::WorldManager::addSystem(ecs::component::ASystem& system)
-{
-    this->_systems.push_back(system);
-}
-
-//initialisation of all Systems
-void ecs::WorldManager::init()
-{
-
-}
-
-//update all Systems
-void ecs::WorldManager::update()
-{
-
-}
-
-void ecs::WorldManager::render()
-{
-
-}
 //refresh all entities
 void ecs::World::refresh()
 {
@@ -49,10 +15,10 @@ void ecs::World::refresh()
 //add entity to group
 void ecs::World::addToGroup(ecs::Entity &entity, GroupID group)
 {
-
 }
+
 //get entities
-template <typename ... Targs> std::vector<ecs::Entity &>& ecs::World::getEntities()
+template <typename ... TArgs> std::vector<ecs::Entity*>& ecs::World::getEntities()
 {
 
 }
@@ -78,7 +44,7 @@ template <typename T> bool ecs::Entity::hasComponent()
 
 }
 //
-template <typename T, typename... Targs> bool ecs::Entity::hasComponent(TArgs&&... mArgs)
+template <typename T, typename... TArgs> bool ecs::Entity::hasComponent(TArgs&&... mArgs)
 {
 
 }
@@ -121,17 +87,17 @@ void ecs::system::Physics::render()
 }
 
 //system->ASystem
-void ecs::component::ASystem::init()
+void ecs::ASystem::init()
 {
 
 }
 
-void ecs::component::ASystem::update()
+void ecs::ASystem::update()
 {
 
 }
 
-void ecs::component::ASystem::render()
+void ecs::ASystem::render()
 {
 
 }
